@@ -1,8 +1,8 @@
 import Foundation
 
 struct AppFont {
-    static let poppinsRegular = "PoppinsRegular"
-    static let poppinsMedium = "PoppinsMedium"
-    static let poppinsSemiBold = "PoppinsSemiBold"
-    static let poppinsBold = "PoppinsBold"
+    static let poppinsRegular = "Poppins-Regular"
+    static let poppinsMedium = "Poppins-Medium"
+    static let poppinsSemiBold = "Poppins-SemiBold"
+    static let poppinsBold = "Poppins-Bold"
 }

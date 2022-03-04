@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3B0F8DD5DCE0B3EA7E6F469F /* Pods_MovieDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5803F340F032ABD93F0403C3 /* Pods_MovieDB.framework */; };
 		E45798AF27CF0F47003CB8EE /* MovieItemTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45798AE27CF0F47003CB8EE /* MovieItemTableViewCellViewModel.swift */; };
+		E45A423C27D1C93A005D7BB6 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45A423B27D1C93A005D7BB6 /* UIFont+Extensions.swift */; };
 		E47780AF27C9C66B0075DCF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47780AE27C9C66B0075DCF4 /* AppDelegate.swift */; };
 		E47780B127C9C66B0075DCF4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47780B027C9C66B0075DCF4 /* SceneDelegate.swift */; };
 		E47780B827C9C66D0075DCF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E47780B727C9C66D0075DCF4 /* Assets.xcassets */; };
@@ -37,7 +38,7 @@
 		E48BCB8D27CDBCFE00865CA8 /* DashboardUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48BCB8C27CDBCFE00865CA8 /* DashboardUseCase.swift */; };
 		E48BCB9027CDBE0800865CA8 /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48BCB8F27CDBE0800865CA8 /* MovieRepository.swift */; };
 		E48BCB9327CDC1A900865CA8 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48BCB9227CDC1A900865CA8 /* Movie.swift */; };
-		E48BCB9627CDC57B00865CA8 /* CategoryMoviesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48BCB9527CDC57B00865CA8 /* CategoryMoviesEndpoint.swift */; };
+		E48BCB9627CDC57B00865CA8 /* CategoryMoviesInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48BCB9527CDC57B00865CA8 /* CategoryMoviesInput.swift */; };
 		E48BCB9827CDC6F600865CA8 /* CategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48BCB9727CDC6F600865CA8 /* CategoryType.swift */; };
 		E48BCB9A27CE12A500865CA8 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48BCB9927CE12A500865CA8 /* UIView+Extensions.swift */; };
 		E48BCBA427CE136F00865CA8 /* MovieItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48BCBA227CE136F00865CA8 /* MovieItemTableViewCell.swift */; };
@@ -53,6 +54,7 @@
 		5803F340F032ABD93F0403C3 /* Pods_MovieDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D71688F66526B547555C9792 /* Pods-MovieDB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieDB.release.xcconfig"; path = "Target Support Files/Pods-MovieDB/Pods-MovieDB.release.xcconfig"; sourceTree = "<group>"; };
 		E45798AE27CF0F47003CB8EE /* MovieItemTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieItemTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		E45A423B27D1C93A005D7BB6 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		E47780AB27C9C66B0075DCF4 /* MovieDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E47780AE27C9C66B0075DCF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E47780B027C9C66B0075DCF4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,7 +85,7 @@
 		E48BCB8C27CDBCFE00865CA8 /* DashboardUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardUseCase.swift; sourceTree = "<group>"; };
 		E48BCB8F27CDBE0800865CA8 /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
 		E48BCB9227CDC1A900865CA8 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
-		E48BCB9527CDC57B00865CA8 /* CategoryMoviesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMoviesEndpoint.swift; sourceTree = "<group>"; };
+		E48BCB9527CDC57B00865CA8 /* CategoryMoviesInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMoviesInput.swift; sourceTree = "<group>"; };
 		E48BCB9727CDC6F600865CA8 /* CategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryType.swift; sourceTree = "<group>"; };
 		E48BCB9927CE12A500865CA8 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		E48BCBA227CE136F00865CA8 /* MovieItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieItemTableViewCell.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				E484D5D127CC855100C0EA2E /* UIColor+Extensions.swift */,
+				E45A423B27D1C93A005D7BB6 /* UIFont+Extensions.swift */,
 				E48BCB9927CE12A500865CA8 /* UIView+Extensions.swift */,
 			);
 			path = Extensions;
@@ -288,7 +291,7 @@
 		E48BCB9427CDC38900865CA8 /* Endpoint */ = {
 			isa = PBXGroup;
 			children = (
-				E48BCB9527CDC57B00865CA8 /* CategoryMoviesEndpoint.swift */,
+				E48BCB9527CDC57B00865CA8 /* CategoryMoviesInput.swift */,
 				E484D5DD27CCAC8300C0EA2E /* Endpoint.swift */,
 			);
 			path = Endpoint;
@@ -470,8 +473,9 @@
 				E484D5DA27CCAC1F00C0EA2E /* APIService.swift in Sources */,
 				E484D5E227CCACC500C0EA2E /* APIError.swift in Sources */,
 				E484D5DE27CCAC8300C0EA2E /* Endpoint.swift in Sources */,
-				E48BCB9627CDC57B00865CA8 /* CategoryMoviesEndpoint.swift in Sources */,
+				E48BCB9627CDC57B00865CA8 /* CategoryMoviesInput.swift in Sources */,
 				E47780B127C9C66B0075DCF4 /* SceneDelegate.swift in Sources */,
+				E45A423C27D1C93A005D7BB6 /* UIFont+Extensions.swift in Sources */,
 				E48BCB8527CDBC8B00865CA8 /* DashboardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

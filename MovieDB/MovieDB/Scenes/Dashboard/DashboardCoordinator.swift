@@ -1,12 +1,12 @@
 import UIKit
 
-protocol DashboardCoordinatorType {
+protocol DashboardCoordinatorType: Coordinator {
     func goToWatchList()
     func goToMovieDetail(movieId: Int)
     func goToSearch(query: String)
 }
 
-final class DashboardCoordinator: Coordinator, DashboardCoordinatorType {
+final class DashboardCoordinator: DashboardCoordinatorType {
     var navigationController: UINavigationController?
 
     init(navigationController: UINavigationController?) {
@@ -14,11 +14,12 @@ final class DashboardCoordinator: Coordinator, DashboardCoordinatorType {
     }
 
     func start() {
-        var dashboardVC = DashboardViewController.instantiate()
-        let useCase = DashboardUseCase()
-        let viewModel = DashboardViewModel(coordinator: self,
-                                           useCase: useCase)
-        dashboardVC.bind(to: viewModel)
+        let viewModel = DashboardViewModel(useCase: DashboardUseCase())
+        var dashboardVC = DashboardViewController.instantiate().then {
+            $0.coordinator = self
+        }
+        dashboardVC.bind(viewModel: viewModel)
+        
         navigationController?.navigationBar.isHidden = true
         navigationController?.pushViewController(dashboardVC, animated: true)
     }
@@ -27,14 +28,14 @@ final class DashboardCoordinator: Coordinator, DashboardCoordinatorType {
     }
     
     func goToWatchList() {
-        //navigation to WatchList Screen
+        //TODO: navigation to WatchList Screen
     }
     
     func goToMovieDetail(movieId: Int) {
-        //navigation to MovieDetail Screen
+        //TODO: navigation to MovieDetail Screen
     }
     
     func goToSearch(query: String) {
-        //navigation to Search Screen
+        //TODO: navigation to Search Screen
     }
 }

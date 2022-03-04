@@ -5,12 +5,11 @@ import Reusable
 import NSObject_Rx
 import Then
 
-fileprivate enum ConstantDashboard {
-    static let movieListTableViewRowHeight = CGFloat(138)
-    static let fontSizeCategoryTitle = CGFloat(12)
-}
-
 final class DashboardViewController: UIViewController, StoryboardBased, Bindable {
+    private struct Constants {
+        static let movieListTableViewRowHeight: CGFloat = 138
+    }
+    
     @IBOutlet private weak var categoryListCollectionView: UICollectionView!
     @IBOutlet private weak var movieListTableView: UITableView!
     @IBOutlet private weak var searchTextField: UITextField!
@@ -19,6 +18,7 @@ final class DashboardViewController: UIViewController, StoryboardBased, Bindable
     @IBOutlet private weak var loadMoreButton: UIButton!
     
     var viewModel: DashboardViewModel!
+    var coordinator: DashboardCoordinator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,19 +26,21 @@ final class DashboardViewController: UIViewController, StoryboardBased, Bindable
     }
     
     func bindViewModel() {
+        let bookmarkButtonTrigger = PublishSubject<Void>()
+        let starButtonTrigger = PublishSubject<Void>()
+        
         let input = DashboardViewModel
             .Input(loadTrigger: Driver.just(()),
-                   searchButtonTrigger: searchButton.rx.tap.asDriver(),
-                   watchListButtonTrigger: watchListButton.rx.tap.asDriver(),
                    loadMoreButtonTrigger: loadMoreButton.rx.tap.asDriver(),
-                   searchText: searchTextField.rx.text.orEmpty.asDriver(),
                    categorySelectedTrigger: categoryListCollectionView.rx.modelSelected(CategoryType.self).asDriver(),
-                   movieSelectedTrigger: movieListTableView.rx.modelSelected(Movie.self).asDriver())
+                   pageNumber: BehaviorRelay<Int>(value: 1),
+                   movieItems: BehaviorRelay<[Movie]>(value: []),
+                   bookmarkButtonTrigger: bookmarkButtonTrigger,
+                   starButtonTrigger: starButtonTrigger)
         
-        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
+        let output = viewModel.transform(input)
         
         output.categoryItems
-            .asDriver()
             .drive(categoryListCollectionView.rx.items) { collectionView, index, item in
                 let indexPath = IndexPath(item: index, section: 0)
                 let cell: CategoryItemCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
@@ -47,31 +49,56 @@ final class DashboardViewController: UIViewController, StoryboardBased, Bindable
             }
             .disposed(by: rx.disposeBag)
         
+        output.firstPageMovies
+            .drive(output.movieItems)
+            .disposed(by: rx.disposeBag)
+        
+        output.nextPageMovies
+            .drive { output.movieItems.accept(output.movieItems.value + $0) }
+            .disposed(by: rx.disposeBag)
+        
         output.movieItems
             .asDriver()
             .drive(movieListTableView.rx.items) { tableView, index, item in
                 let indexPath = IndexPath(item: index, section: 0)
                 let cell: MovieItemTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-                cell.viewModel = MovieItemTableViewCellViewModel(movie: item)
-
-                //MARK: - Bookmark Button Action
-                cell.bookmarkButton.rx.tap.asDriver()
-                    .do(onNext: {
-                        //Save local using Core Data
-                    })
-                    .drive()
-                    .disposed(by: cell.disposeBag)
-
-                //MARK: - Star Button Action
-                cell.starButton.rx.tap.asDriver()
-                    .do(onNext: {
-                        //Do something
-                    })
-                    .drive()
-                    .disposed(by: cell.disposeBag)
-
+                let viewModel = MovieItemTableViewCellViewModel(movie: item)
+                cell.bindViewModel(viewModel: viewModel,
+                                   bookmarkButtonTrigger: bookmarkButtonTrigger,
+                                   starButtonTrigger: starButtonTrigger)
+                
                 return cell
             }
+            .disposed(by: rx.disposeBag)
+        
+        output.saveFavoriteMovie
+            .drive()
+            .disposed(by: rx.disposeBag)
+        
+        output.voteMovie
+            .drive()
+            .disposed(by: rx.disposeBag)
+        //MARK: - Navigation
+        searchButton.rx
+            .tap
+            .withLatestFrom(searchTextField.rx.text.orEmpty)
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator.goToSearch(query: $0)
+            })
+            .disposed(by: rx.disposeBag)
+                
+        watchListButton.rx
+            .tap
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator.goToWatchList()
+            })
+            .disposed(by: rx.disposeBag)
+                
+        movieListTableView.rx
+            .modelSelected(Movie.self)
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator.goToMovieDetail(movieId: $0.id)
+            })
             .disposed(by: rx.disposeBag)
     }
 }
@@ -85,7 +112,7 @@ extension DashboardViewController {
     
     private func configTextField() {
         searchTextField.attributedPlaceholder = NSAttributedString(
-            string: AppText.searchTextFieldPlaceHolder,
+            string: AppText.searchTextFieldPlaceholder,
             attributes: [NSAttributedString.Key.foregroundColor: AppColor.gallery]
         )
     }
@@ -93,7 +120,7 @@ extension DashboardViewController {
     private func configTableView() {
         movieListTableView.do {
             $0.register(cellType: MovieItemTableViewCell.self)
-            $0.rowHeight = ConstantDashboard.movieListTableViewRowHeight
+            $0.rowHeight = Constants.movieListTableViewRowHeight
         }
     }
     
@@ -112,8 +139,8 @@ extension DashboardViewController: UICollectionViewDelegateFlowLayout {
         if 0..<CategoryType.allCases.count ~= indexPath.item {
             let item = CategoryType.allCases[indexPath.item]
             let itemSize = item.title.size(withAttributes: [
-                NSAttributedString.Key.font : UIFont(name: AppFont.poppinsSemiBold,
-                                                     size: ConstantDashboard.fontSizeCategoryTitle) ?? UIFont()
+                NSAttributedString.Key.font : UIFont.setPoppinsFont(style: .poppinsSemiBold,
+                                                                    size: .twelve)
             ])
             return CGSize(width: itemSize.width * 3 / 2,
                           height: collectionView.frame.height)

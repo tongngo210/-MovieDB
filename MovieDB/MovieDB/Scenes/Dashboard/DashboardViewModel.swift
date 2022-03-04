@@ -2,85 +2,70 @@ import RxCocoa
 import RxSwift
 
 struct DashboardViewModel {
-    let coordinator: DashboardCoordinatorType
     let useCase: DashboardUseCaseType
 }
 
 extension DashboardViewModel: ViewModel {
     struct Input {
         let loadTrigger: Driver<Void>
-        let searchButtonTrigger: Driver<Void>
-        let watchListButtonTrigger: Driver<Void>
         let loadMoreButtonTrigger: Driver<Void>
-        let searchText: Driver<String>
         let categorySelectedTrigger: Driver<CategoryType>
-        let movieSelectedTrigger: Driver<Movie>
+        let pageNumber: BehaviorRelay<Int>
+        let movieItems: BehaviorRelay<[Movie]>
+        let bookmarkButtonTrigger: PublishSubject<Void>
+        let starButtonTrigger: PublishSubject<Void>
     }
     
     struct Output {
-        let movieItems = BehaviorRelay<[Movie]>(value: [])
-        let categoryItems = BehaviorRelay<[CategoryType]>(value: [])
-        let pageNumber = BehaviorRelay<Int>(value: 1)
+        let movieItems: BehaviorRelay<[Movie]>
+        let firstPageMovies: Driver<[Movie]>
+        let nextPageMovies: Driver<[Movie]>
+        let categoryItems: Driver<[CategoryType]>
+        let saveFavoriteMovie: Driver<Void>
+        let voteMovie: Driver<Void>
     }
     
-    func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output()
-        
-        input.loadTrigger
+    func transform(_ input: Input) -> Output {
+        let categoryItems = input.loadTrigger
             .map { CategoryType.allCases }
-            .drive(output.categoryItems)
-            .disposed(by: disposeBag)
         
-        input.categorySelectedTrigger
-            .do(onNext: { _ in
-                output.pageNumber.accept(1)
-            })
+        let saveFavoriteMovie = input.bookmarkButtonTrigger
+            //TODO: Save Movie To Favorite
+            .map { _ in return () }
+            .asDriver(onErrorJustReturn: ())
+        
+        let voteMovie = input.starButtonTrigger
+            //TODO: Vote Movie and send to server
+            .map { _ in return () }
+            .asDriver(onErrorJustReturn: ())
+        
+        let firstPageMovies = input.categorySelectedTrigger
+            .do{ _ in
+                input.pageNumber.accept(1)
+            }
             .flatMapLatest {
-                useCase.getMoviesFromCategory($0, page: output.pageNumber.value)
+                useCase.getFirstPageMoviesOfCategory($0)
                     .asDriver(onErrorJustReturn: [])
             }
-            .drive(output.movieItems)
-            .disposed(by: disposeBag)
         
-        input.loadMoreButtonTrigger
-            .do(onNext: { _ in
-                output.pageNumber.accept(output.pageNumber.value + 1)
-            })
+        let nextPageMovies = input.loadMoreButtonTrigger
+            .do { _ in
+                input.pageNumber.accept(input.pageNumber.value + 1)
+            }
             .withLatestFrom(input.categorySelectedTrigger)
             .flatMapLatest {
-                useCase.getMoviesFromCategory($0, page: output.pageNumber.value)
+                useCase.getMoreMoviesOfCategory($0, page: input.pageNumber.value)
                     .asDriver { _ in
-                        output.pageNumber.accept(output.pageNumber.value - 1)
+                        input.pageNumber.accept(input.pageNumber.value - 1)
                         return Driver.just([])
                     }
             }
-            .drive(onNext: { result in
-                output.movieItems.accept(output.movieItems.value + result)
-            })
-            .disposed(by: disposeBag)
         
-        input.searchButtonTrigger
-            .withLatestFrom(input.searchText)
-            .do(onNext: {
-                coordinator.goToSearch(query: $0)
-            })
-            .drive()
-            .disposed(by: disposeBag)
-        
-        input.watchListButtonTrigger
-            .do(onNext: {
-                coordinator.goToWatchList()
-            })
-            .drive()
-            .disposed(by: disposeBag)
-                
-        input.movieSelectedTrigger
-            .do(onNext: {
-                coordinator.goToMovieDetail(movieId: $0.id)
-            })
-            .drive()
-            .disposed(by: disposeBag)
-                
-        return output
+        return Output(movieItems: input.movieItems,
+                      firstPageMovies: firstPageMovies,
+                      nextPageMovies: nextPageMovies,
+                      categoryItems: categoryItems,
+                      saveFavoriteMovie: saveFavoriteMovie,
+                      voteMovie: voteMovie)
     }
 }

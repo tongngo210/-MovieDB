@@ -1,10 +1,6 @@
 import UIKit
 import Reusable
 
-fileprivate enum ConstantCategoryItemCollectionCell {
-    static let fontSizeCategoryTitle = CGFloat(12)
-}
-
 final class CategoryItemCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet private weak var categoryLabel: UILabel!
     
@@ -16,29 +12,26 @@ final class CategoryItemCollectionViewCell: UICollectionViewCell, NibReusable {
     
     override var isSelected: Bool {
         didSet {
-            categoryLabel.do {
-                if isSelected {
-                    $0.backgroundColor = AppColor.puertoRico
-                    $0.font = UIFont(name: AppFont.poppinsSemiBold,
-                                     size: ConstantCategoryItemCollectionCell.fontSizeCategoryTitle)
-                    $0.textColor = AppColor.charade
-                } else {
-                    configCell()
-                }
-            }
+            isSelected ? updateUIWhenCellIsSelected() : updateUIWhenCellIsUnselected()
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        configCell()
+        updateUIWhenCellIsUnselected()
     }
 
-    private func configCell() {
+    private func updateUIWhenCellIsSelected() {
+        categoryLabel.do {
+            $0.backgroundColor = AppColor.puertoRico
+            $0.font = UIFont.setPoppinsFont(style: .poppinsSemiBold, size: .twelve)
+            $0.textColor = AppColor.charade
+        }
+    }
+    private func updateUIWhenCellIsUnselected() {
         categoryLabel.do {
             $0.backgroundColor = AppColor.brightGray
-            $0.font = UIFont(name: AppFont.poppinsRegular,
-                             size: ConstantCategoryItemCollectionCell.fontSizeCategoryTitle)
+            $0.font = UIFont.setPoppinsFont(style: .poppinsRegular, size: .twelve)
             $0.textColor = AppColor.gallery
         }
     }

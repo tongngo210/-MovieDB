@@ -18,7 +18,7 @@ final class DashboardCoordinator: DashboardCoordinatorType {
         var dashboardVC = DashboardViewController.instantiate().then {
             $0.coordinator = self
         }
-        dashboardVC.bind(viewModel: viewModel)
+        dashboardVC.set(viewModel: viewModel)
         
         navigationController?.navigationBar.isHidden = true
         navigationController?.pushViewController(dashboardVC, animated: true)

@@ -9,7 +9,7 @@ protocol Bindable {
 }
 
 extension Bindable where Self: UIViewController {
-    mutating func bind(viewModel: Self.ViewModel) {
+    mutating func set(viewModel: Self.ViewModel) {
         self.viewModel = viewModel
         loadViewIfNeeded()
         bindViewModel()

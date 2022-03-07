@@ -14,9 +14,9 @@ final class MovieItemTableViewCell: UITableViewCell, NibReusable {
     
     var disposeBag = DisposeBag()
     
-    func bindViewModel(viewModel: MovieItemTableViewCellViewModel,
-                       bookmarkButtonTrigger: PublishSubject<Void>,
-                       starButtonTrigger: PublishSubject<Void>) {
+    func set(viewModel: MovieItemTableViewCellViewModel,
+             bookmarkButtonTrigger: PublishSubject<Void>,
+             starButtonTrigger: PublishSubject<Void>) {
         movieImageView.sd_setImage(with: URL(string: APIURLs.Image.original + viewModel.poster),
                                    completed: nil)
         movieNameLabel.text = viewModel.title

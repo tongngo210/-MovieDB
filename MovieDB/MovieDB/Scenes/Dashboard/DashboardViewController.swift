@@ -63,9 +63,10 @@ final class DashboardViewController: UIViewController, StoryboardBased, Bindable
                 let indexPath = IndexPath(item: index, section: 0)
                 let cell: MovieItemTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 let viewModel = MovieItemTableViewCellViewModel(movie: item)
-                cell.bindViewModel(viewModel: viewModel,
-                                   bookmarkButtonTrigger: bookmarkButtonTrigger,
-                                   starButtonTrigger: starButtonTrigger)
+                
+                cell.set(viewModel: viewModel,
+                         bookmarkButtonTrigger: bookmarkButtonTrigger,
+                         starButtonTrigger: starButtonTrigger)
                 
                 return cell
             }

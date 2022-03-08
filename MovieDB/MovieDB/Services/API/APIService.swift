@@ -4,7 +4,7 @@ import RxCocoa
 struct APIService {
     static let shared = APIService()
     
-    func request<T: Decodable>(input: Endpoint) -> Observable<T> {
+    func request<T: Decodable>(input: BaseInput) -> Observable<T> {
         Observable.create { obs in
             if let url = input.url {
                 URLSession.shared.dataTask(with: url) { data, response, error in

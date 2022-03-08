@@ -1,10 +1,9 @@
 import UIKit
 
-protocol MovieDetailCoordinatorType {
-    func finish()
+protocol MovieDetailCoordinatorType: Coordinator {
 }
 
-final class MovieDetailCoordinator: Coordinator, MovieDetailCoordinatorType {
+final class MovieDetailCoordinator: MovieDetailCoordinatorType {
     var navigationController: UINavigationController?
     var movieId: Int
     

@@ -3,7 +3,7 @@ import Reusable
 
 final class MovieGenreCollectionViewCell: UICollectionViewCell, NibReusable {
 
-    @IBOutlet weak var genreNameLabel: UILabel!
+    @IBOutlet private weak var genreNameLabel: UILabel!
     
     var viewModel: MovieGenreCollectionViewCellViewModel!
     

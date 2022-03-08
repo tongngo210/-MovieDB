@@ -10,12 +10,10 @@ struct MovieDetailUseCase: MovieDetailUseCaseType {
     private let repository = MovieDetailRepository()
     
     func getMovieDetail(movieId: Int) -> Observable<MovieDetail> {
-        let input = GetMovieDetailInput(movieId: movieId)
-        return repository.getMovieDetail(input: input)
+        return repository.getMovieDetail(movieId: movieId)
     }
     
     func getMovieReviews(movieId: Int) -> Observable<[MovieReview]> {
-        let input = GetMovieReviewsInput(movieId: movieId)
-        return repository.getMovieReviews(input: input)
+        return repository.getMovieReviews(movieId: movieId)
     }
 }

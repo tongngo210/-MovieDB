@@ -11,5 +11,6 @@ struct AppName {
         static let searchIcon = "searchIcon"
         static let whiteBookmark = "whiteBookmark"
         static let whiteStar = "whiteStar"
+        static let defaultAvatar = "defaultAvatar"
     }
 }

@@ -1,8 +1,11 @@
 import Foundation
+import UIKit
 
 struct AppFont {
-    static let poppinsRegular = "PoppinsRegular"
-    static let poppinsMedium = "PoppinsMedium"
-    static let poppinsSemiBold = "PoppinsSemiBold"
-    static let poppinsBold = "PoppinsBold"
+    enum Poppins: String {
+        case poppinsRegular = "Poppins-Regular"
+        case poppinsMedium = "Poppins-Medium"
+        case poppinsSemiBold = "Poppins-SemiBold"
+        case poppinsBold = "Poppins-Bold"
+    }
 }

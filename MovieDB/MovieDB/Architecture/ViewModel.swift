@@ -1,4 +1,5 @@
 import Foundation
+import RxSwift
 
 protocol ViewModel {
     associatedtype Input

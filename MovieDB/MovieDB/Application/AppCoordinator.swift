@@ -10,8 +10,8 @@ class AppCoordinator {
 
     func start() {
         let navigationController = UINavigationController()
-        // Navigate to Dashboard Screen
-        
+        let dashboardCoordinator = DashboardCoordinator(navigationController: navigationController)
+        dashboardCoordinator.start()
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }

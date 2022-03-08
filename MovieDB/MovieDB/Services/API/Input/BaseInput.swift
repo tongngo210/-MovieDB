@@ -1,6 +1,6 @@
 import Foundation
 
-class Endpoint {
+class BaseInput {
     let path: String
     let queryItems: [URLQueryItem]?
     

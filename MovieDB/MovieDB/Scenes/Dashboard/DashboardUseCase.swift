@@ -11,17 +11,14 @@ struct DashboardUseCase: DashboardUseCaseType {
     private let repository = MovieRepository()
     
     func getFirstPageMoviesOfCategory(_ category: CategoryType) -> Observable<[Movie]> {
-        let input = CategoryMoviesInput(category: category, page: 1)
-        return repository.getMoviesFromCategory(input: input)
+        return repository.getMoviesFromCategory(category: category, page: 1)
     }
     
     func getMoreMoviesOfCategory(_ category: CategoryType, page: Int) -> Observable<[Movie]> {
-        let input = CategoryMoviesInput(category: category, page: page)
-        return repository.getMoviesFromCategory(input: input)
+        return repository.getMoviesFromCategory(category: category, page: page)
     }
     
     func refreshMoviesOfCategory(_ category: CategoryType) -> Observable<[Movie]> {
-        let input = CategoryMoviesInput(category: category, page: 1)
-        return repository.getMoviesFromCategory(input: input)
+        return repository.getMoviesFromCategory(category: category, page: 1)
     }
 }

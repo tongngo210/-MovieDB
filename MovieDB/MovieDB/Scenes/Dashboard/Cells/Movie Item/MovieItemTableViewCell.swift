@@ -12,11 +12,13 @@ final class MovieItemTableViewCell: UITableViewCell, NibReusable {
     @IBOutlet private weak var bookmarkButton: UIButton!
     @IBOutlet private weak var starButton: UIButton!
     
+    var viewModel: MovieItemTableViewCellViewModel!
     var disposeBag = DisposeBag()
     
     func set(viewModel: MovieItemTableViewCellViewModel,
              bookmarkButtonTrigger: PublishSubject<Void>,
              starButtonTrigger: PublishSubject<Void>) {
+        self.viewModel = viewModel
         movieImageView.sd_setImage(with: URL(string: APIURLs.Image.original + viewModel.poster),
                                    completed: nil)
         movieNameLabel.text = viewModel.title

@@ -18,9 +18,9 @@ extension DashboardViewModel: ViewModel {
     
     struct Output {
         let movieItems: BehaviorRelay<[Movie]>
-        let firstPageMovies: Driver<[Movie]>
-        let nextPageMovies: Driver<[Movie]>
         let categoryItems: Driver<[CategoryType]>
+        let categorySelectedTrigger: Driver<Void>
+        let loadMoreButtonTrigger: Driver<Void>
         let saveFavoriteMovie: Driver<Void>
         let voteMovie: Driver<Void>
     }
@@ -39,32 +39,40 @@ extension DashboardViewModel: ViewModel {
             .map { _ in return () }
             .asDriver(onErrorJustReturn: ())
         
-        let firstPageMovies = input.categorySelectedTrigger
-            .do{ _ in
+        let categorySelectedTrigger = input.categorySelectedTrigger
+            .do { _ in
                 input.pageNumber.accept(1)
             }
             .flatMapLatest {
                 useCase.getFirstPageMoviesOfCategory($0)
                     .asDriver(onErrorJustReturn: [])
             }
+            .do(onNext: {
+                input.movieItems.accept($0)
+            })
+            .map { _ in return () }
         
-        let nextPageMovies = input.loadMoreButtonTrigger
+        let loadMoreButtonTrigger = input.loadMoreButtonTrigger
             .do { _ in
                 input.pageNumber.accept(input.pageNumber.value + 1)
             }
             .withLatestFrom(input.categorySelectedTrigger)
             .flatMapLatest {
                 useCase.getMoreMoviesOfCategory($0, page: input.pageNumber.value)
-                    .asDriver { _ in
+                    .asDriver(onErrorRecover: { _ in
                         input.pageNumber.accept(input.pageNumber.value - 1)
                         return Driver.just([])
-                    }
+                    })
             }
+            .do(onNext: {
+                input.movieItems.accept(input.movieItems.value + $0)
+            })
+            .map { _ in return () }
         
         return Output(movieItems: input.movieItems,
-                      firstPageMovies: firstPageMovies,
-                      nextPageMovies: nextPageMovies,
                       categoryItems: categoryItems,
+                      categorySelectedTrigger: categorySelectedTrigger,
+                      loadMoreButtonTrigger: loadMoreButtonTrigger,
                       saveFavoriteMovie: saveFavoriteMovie,
                       voteMovie: voteMovie)
     }

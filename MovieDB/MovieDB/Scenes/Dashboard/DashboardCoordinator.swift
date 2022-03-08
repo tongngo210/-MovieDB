@@ -15,9 +15,8 @@ final class DashboardCoordinator: DashboardCoordinatorType {
 
     func start() {
         let viewModel = DashboardViewModel(useCase: DashboardUseCase())
-        var dashboardVC = DashboardViewController.instantiate().then {
-            $0.coordinator = self
-        }
+        var dashboardVC = DashboardViewController.instantiate()
+        dashboardVC.coordinator = self
         dashboardVC.set(viewModel: viewModel)
         
         navigationController?.navigationBar.isHidden = true

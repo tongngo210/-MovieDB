@@ -25,7 +25,7 @@ final class DashboardViewController: UIViewController, StoryboardBased, Bindable
         configView()
     }
     
-    func bindViewModel() {
+    func bind() {
         let bookmarkButtonTrigger = PublishSubject<Void>()
         let starButtonTrigger = PublishSubject<Void>()
         
@@ -49,14 +49,6 @@ final class DashboardViewController: UIViewController, StoryboardBased, Bindable
             }
             .disposed(by: rx.disposeBag)
         
-        output.firstPageMovies
-            .drive(output.movieItems)
-            .disposed(by: rx.disposeBag)
-        
-        output.nextPageMovies
-            .drive { output.movieItems.accept(output.movieItems.value + $0) }
-            .disposed(by: rx.disposeBag)
-        
         output.movieItems
             .asDriver()
             .drive(movieListTableView.rx.items) { tableView, index, item in
@@ -70,6 +62,14 @@ final class DashboardViewController: UIViewController, StoryboardBased, Bindable
                 
                 return cell
             }
+            .disposed(by: rx.disposeBag)
+        
+        output.categorySelectedTrigger
+            .drive()
+            .disposed(by: rx.disposeBag)
+        
+        output.loadMoreButtonTrigger
+            .drive()
             .disposed(by: rx.disposeBag)
         
         output.saveFavoriteMovie

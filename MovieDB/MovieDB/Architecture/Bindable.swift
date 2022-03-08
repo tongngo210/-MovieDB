@@ -5,13 +5,13 @@ protocol Bindable {
 
     var viewModel: ViewModel! { get set }
 
-    func bindViewModel()
+    func bind()
 }
 
 extension Bindable where Self: UIViewController {
     mutating func set(viewModel: Self.ViewModel) {
         self.viewModel = viewModel
         loadViewIfNeeded()
-        bindViewModel()
+        bind()
     }
 }

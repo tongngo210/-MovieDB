@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="B9T-mj-Nj8">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="PoppinsBold.ttf">
+            <string>Poppins-Bold</string>
+        </array>
+        <array key="PoppinsSemiBold.ttf">
+            <string>Poppins-SemiBold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Watch List View Controller-->
+        <scene sceneID="9q5-NY-vJs">
+            <objects>
+                <viewController id="B9T-mj-Nj8" customClass="WatchListViewController" customModule="MovieDB" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MwD-wr-yyE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie DB App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5In-6c-s2Q">
+                                <rect key="frame" x="29" y="50" width="356" height="60.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="5In-6c-s2Q" secondAttribute="height" multiplier="317:54" id="CBu-Mp-qrn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="36"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Watch List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rgn-40-xjL">
+                                <rect key="frame" x="29" y="132.5" width="356" height="30.5"/>
+                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gZm-BQ-ACf">
+                                <rect key="frame" x="29" y="185" width="356" height="603.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jGH-DP-Kzp">
+                                <rect key="frame" x="269" y="819.5" width="116" height="46.5"/>
+                                <color key="backgroundColor" name="brightGray"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="jGH-DP-Kzp" secondAttribute="height" multiplier="105:42" id="nzX-IM-1UC"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="backButton" title="Back" imagePadding="8">
+                                    <fontDescription key="titleFontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="14"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0f-RT-GDf">
+                                <rect key="frame" x="29" y="826.5" width="200" height="31.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="m0f-RT-GDf" secondAttribute="height" multiplier="172:27" id="v27-NI-1bN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="18"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Load More"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0TT-Zy-Pgg"/>
+                        <color key="backgroundColor" name="appBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Rgn-40-xjL" firstAttribute="leading" secondItem="5In-6c-s2Q" secondAttribute="leading" id="392-tb-CNN"/>
+                            <constraint firstItem="5In-6c-s2Q" firstAttribute="top" secondItem="MwD-wr-yyE" secondAttribute="top" constant="50" id="5dr-kW-rhN"/>
+                            <constraint firstItem="jGH-DP-Kzp" firstAttribute="width" secondItem="MwD-wr-yyE" secondAttribute="width" multiplier="105:375" id="8ez-rh-Foz"/>
+                            <constraint firstItem="Rgn-40-xjL" firstAttribute="top" secondItem="5In-6c-s2Q" secondAttribute="bottom" constant="22" id="DAx-Fg-Afq"/>
+                            <constraint firstItem="jGH-DP-Kzp" firstAttribute="leading" secondItem="m0f-RT-GDf" secondAttribute="trailing" constant="40" id="I9b-F0-Ij2"/>
+                            <constraint firstItem="0TT-Zy-Pgg" firstAttribute="trailing" secondItem="5In-6c-s2Q" secondAttribute="trailing" constant="29" id="Svo-dq-8xY"/>
+                            <constraint firstItem="gZm-BQ-ACf" firstAttribute="leading" secondItem="0TT-Zy-Pgg" secondAttribute="leading" constant="29" id="TEh-GP-VKs"/>
+                            <constraint firstItem="Rgn-40-xjL" firstAttribute="trailing" secondItem="5In-6c-s2Q" secondAttribute="trailing" id="X1k-OC-BGm"/>
+                            <constraint firstItem="m0f-RT-GDf" firstAttribute="leading" secondItem="0TT-Zy-Pgg" secondAttribute="leading" constant="29" id="Yyx-LG-aOy"/>
+                            <constraint firstAttribute="bottom" secondItem="jGH-DP-Kzp" secondAttribute="bottom" constant="30" id="aOH-cN-7vu"/>
+                            <constraint firstItem="5In-6c-s2Q" firstAttribute="leading" secondItem="0TT-Zy-Pgg" secondAttribute="leading" constant="29" id="dff-I1-BdU"/>
+                            <constraint firstItem="gZm-BQ-ACf" firstAttribute="top" secondItem="Rgn-40-xjL" secondAttribute="bottom" constant="22" id="k5T-gv-dwA"/>
+                            <constraint firstAttribute="bottom" secondItem="m0f-RT-GDf" secondAttribute="bottom" constant="38" id="qFG-xk-qhK"/>
+                            <constraint firstItem="Rgn-40-xjL" firstAttribute="height" secondItem="5In-6c-s2Q" secondAttribute="height" multiplier="27:54" id="sha-tj-nSh"/>
+                            <constraint firstItem="0TT-Zy-Pgg" firstAttribute="trailing" secondItem="gZm-BQ-ACf" secondAttribute="trailing" constant="29" id="vNH-SC-6bQ"/>
+                            <constraint firstItem="0TT-Zy-Pgg" firstAttribute="trailing" secondItem="jGH-DP-Kzp" secondAttribute="trailing" constant="29" id="ygL-pG-fJZ"/>
+                            <constraint firstItem="jGH-DP-Kzp" firstAttribute="top" secondItem="gZm-BQ-ACf" secondAttribute="bottom" constant="31" id="yqX-R7-npE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="jGH-DP-Kzp" id="yw6-D9-wwC"/>
+                        <outlet property="favoriteMovieTableView" destination="gZm-BQ-ACf" id="NKc-bY-yqu"/>
+                        <outlet property="loadMoreButton" destination="m0f-RT-GDf" id="OLK-Lt-AGh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gXX-6H-WRO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-32" y="51"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="backButton" width="24" height="24"/>
+        <namedColor name="appBackgroundColor">
+            <color red="0.14100000262260437" green="0.16500000655651093" blue="0.19599999487400055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="brightGray">
+            <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

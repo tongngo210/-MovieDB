@@ -1,6 +1,7 @@
 import Foundation
 
 struct AppName {
+    static let coreDataPersistentContainer = "CoreDataFavoriteMovie"
     struct Image {
         static let appLogo = "appLogo"
         static let backIcon = "backIcon"
